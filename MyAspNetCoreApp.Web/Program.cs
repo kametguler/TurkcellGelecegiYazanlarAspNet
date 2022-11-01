@@ -1,7 +1,23 @@
+using Microsoft.EntityFrameworkCore;
+using MyAspNetCoreApp.Web.Helpers;
+using MyAspNetCoreApp.Web.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+//db connection
+builder.Services.AddDbContext<AppDbContext>(options =>
+{
+
+    options.UseSqlServer(builder.Configuration.GetConnectionString("SqlCon"));
+});
+
+builder.Services.AddSingleton<IHelper, Helper>();
+//builder.Services.AddScoped<IHelper, Helper>();
+//varsa yoksa da olusturur
+//builder.Services.AddTransient<IHelper, Helper>();
 
 var app = builder.Build();
 

@@ -5,6 +5,13 @@
 
 @model List<Product>
 
+<h1>Ürünler</h1>
+
+@if (TempData["status"] != null)
+{
+    <div class="alert alert-success">@TempData["status"]</div>
+}
+
 <table class="table">
     <thead>
         <tr>
@@ -12,6 +19,7 @@
             <th>Name</th>
             <th>Price</th>
             <th>Stock</th>
+            @*<th>Color</th> *@
             <th>Actions</th>
         </tr>
     </thead>
@@ -23,12 +31,13 @@
             <td>@product.Name</td>
             <td>@product.Price</td>
             <td>@product.Stock</td>
+            @*<td>@product.Color</td>*@
             <td>
                 <div>
                     @*<a href="/products/update/@product.Id" class="btn btn-outline-success">Update</a>*@
                     @*<a href="/products/remove/@product.Id" class="btn btn-outline-danger">Delete</a>*@
                     <a asp-controller="products" asp-action="remove" asp-route-id="@product.Id" class="btn btn-outline-danger">Remove</a>
-                    @*<a asp-controller="products" asp-action="update" asp-route-id="@product.Id" class="btn btn-outline-success">Update</a>*@
+                    <a asp-controller="products" asp-action="update" asp-route-id="@product.Id" class="btn btn-outline-success">Update</a>
                 </div>
             </td>
         </tr>
